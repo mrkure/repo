@@ -2,12 +2,13 @@
 """
 Created on Thu Apr 19 16:30:08 2018
 
-@author: zdenek
-"""
+n"""
 import os
 import sys
 # append dir for script import
-sys.path.append('D:/scripts')
+sys.path.append('U:/!Python')
+
+
 import numpy as np
 import pandas as pd
 import functions_io as fio
@@ -20,7 +21,7 @@ import matplotlib.pyplot as plt
 # user settings 
 # =============================================================================
 """
-used_dirs_keys   = ['sample']
+used_dirs_keys   = ['testtt']
 
 temperature_diff = 1
 pressure_offset  = 0
@@ -42,7 +43,7 @@ voltages            = [10.5, 13.5, 15.5]
 pressures           = [4500, 6000, 8500]
 valid_measurements  = 50
 
-skip_rows           = 1
+skip_rows           = 20
 
 """
 # =============================================================================
@@ -77,7 +78,7 @@ plt.ioff()
 # =============================================================================
 calc = '1'
 res_name = os.path.normpath('{}/{}/{}'.format(cwd, results_dir, results_name))
-apaths   = fio.get_files(cwd, extension = ['xlsx', 'xlsm'], contains = [res_name], not_contains=['~'], print_path=False)
+apaths   = fio.get_files(cwd, extension = ['xlsx'], contains = [res_name], not_contains=['~'], print_path=False)
 
 for name in apaths:
     calc = input("results file has been found, calculate again ? ")
@@ -91,7 +92,7 @@ if calc == '1' or calc == 'y':
     # =============================================================================
     # getting all data file names
     # =============================================================================
-    abs_paths    = fio.get_files(cwd, extension = ['xlsx'], contains = used_dirs_keys, not_contains=['~'], print_path=False)
+    abs_paths    = fio.get_files(cwd, extension = ['xlsm'], contains = used_dirs_keys, not_contains=['~',], print_path=False)
     root_dirs    = fio.get_parts_of_paths_list(abs_paths, -3)
     sample_dirs  = fio.get_parts_of_paths_list(abs_paths, -2)
     filenames    = fio.get_parts_of_paths_list(abs_paths, -1)
@@ -284,11 +285,11 @@ for root_dir in root_dirs:
                 next_frame = next_frame.sort_values(by='temperature')
                 p_diff_color_map.reset()
                 if plot_p_diff:
-                    plt.plot(next_frame.temperature.tolist(),next_frame.p_diff.tolist(), color= p_diff_color_map.get_color(False), lw = 1, marker = 'o')
+                    plt.plot(next_frame.temperature.tolist(),next_frame.p_diff.tolist(), color= p_diff_color_map.get_color(True), lw = 1, marker = 'o')
                 if plot_p_BMP:
-                    plt.plot(next_frame.temperature.tolist(),next_frame.p_BMP.tolist(), color = p_diff_color_map.get_color(False), lw = 1, marker = 'o')
+                    plt.plot(next_frame.temperature.tolist(),next_frame.p_BMP.tolist(), color = p_diff_color_map.get_color(True), lw = 1, marker = 'o')
                 if plot_p_MSP:                               
-                    plt.plot(next_frame.temperature.tolist(),next_frame.p_MSP.tolist(), color = p_diff_color_map.get_color(False), lw = 1, marker = 'o')                             
+                    plt.plot(next_frame.temperature.tolist(),next_frame.p_MSP.tolist(), color = p_diff_color_map.get_color(True), lw = 1, marker = 'o')                             
     p_diff_color_map.reset()
     if plot_p_diff:
         fplot.add_label('p_diff', p_diff_color_map.get_color(True), marker = 'o' )  
@@ -362,10 +363,6 @@ print('Generating comparison graphs ... ({:02d}/{:02d})'.format(g_num-1, g_total
 print() 
  
 input("press Enter to exit ;) ") 
-                    
-                    
-                    
-                    
                     
                     
                     
