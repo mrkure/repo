@@ -410,8 +410,8 @@ def modify_ticks(new_labels, new_locations, action = "clear", axes_type = 'x'):
                 result_labels[j+i+1]    = None            
             else: pass
     
-    result_locations = list(filter(None, result_locations))         
-    result_labels    = list(filter(None, result_labels)) 
+    result_locations = list(filter(lambda x : x != None, result_locations))         
+    result_labels    = list(filter(lambda x : x != None, result_labels)) 
 
     if axes_type == "x":
         plt.xticks(result_locations, result_labels)
@@ -862,29 +862,3 @@ class C_map():
 #print(cmap.get_color(True))              
 # =============================================================================
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
