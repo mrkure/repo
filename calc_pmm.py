@@ -2,6 +2,7 @@
 """
 Created on Thu Apr 19 16:30:08 2018
 
+@author: zdenek
 n"""
 import os
 import sys
@@ -21,10 +22,13 @@ import matplotlib.pyplot as plt
 # user settings 
 # =============================================================================
 """
-used_dirs_keys   = ['testtt']
+included_dirs_keywords = ['testtt']
+excluded_dirs_keywords = ['~', '_']
+skip_rows              = 20
 
 temperature_diff = 1
 pressure_offset  = 0
+
 # p_diff graphs
 plot_p_diff      = 1
 plot_p_MSP       = 1
@@ -43,7 +47,7 @@ voltages            = [10.5, 13.5, 15.5]
 pressures           = [4500, 6000, 8500]
 valid_measurements  = 50
 
-skip_rows           = 20
+
 
 """
 # =============================================================================
@@ -62,7 +66,6 @@ comparison_graphs                                        = 'comparison_graphs'
 p_diff_graphs, p_diff_base, p_diff_file, p_diff_root_dir = 'p_diff_graphs', 'base', 'file', 'root_dir'
 # creating dir structure for results
 os.makedirs('{}/{}'.format(cwd, results_dir), exist_ok=True)
-
 
 # =============================================================================
 # calculation settings variables declaration
@@ -92,7 +95,7 @@ if calc == '1' or calc == 'y':
     # =============================================================================
     # getting all data file names
     # =============================================================================
-    abs_paths    = fio.get_files(cwd, extension = ['xlsm'], contains = used_dirs_keys, not_contains=['~',], print_path=False)
+    abs_paths    = fio.get_files(cwd, extension = ['xlsm'], contains = included_dirs_keywords, not_contains = excluded_dirs_keywords, print_path=False)
     root_dirs    = fio.get_parts_of_paths_list(abs_paths, -3)
     sample_dirs  = fio.get_parts_of_paths_list(abs_paths, -2)
     filenames    = fio.get_parts_of_paths_list(abs_paths, -1)
@@ -363,6 +366,9 @@ print('Generating comparison graphs ... ({:02d}/{:02d})'.format(g_num-1, g_total
 print() 
  
 input("press Enter to exit ;) ") 
+                    
+                    
+                    
                     
                     
                     
